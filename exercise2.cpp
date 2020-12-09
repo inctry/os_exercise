@@ -11,7 +11,8 @@ struct pcb {
     int atime; // arrive time
     int ntime;  // need to be running time
     int rtime;  // has been running time
-    int srtime,ftime,cirtime,valcirtime;
+    int srtime,ftime;
+    double cirtime,valcirtime;
     struct pcb *next = NULL;
     pcb() {}
 };
@@ -72,6 +73,7 @@ void check() {
 }
 void running() {
 	if(opt == 1) sort(ready.begin(), ready.end(), cmp1);
+    else sort(ready.begin(), ready.end(), cmp2);
     auto front = ready.begin();
     pcb *p = *front;
     ready.erase(front);
@@ -95,6 +97,7 @@ void running() {
 }
 int main() {
     int len = 0;
+    freopen("test.txt", "r", stdin);
     cout << "Please Input the number of Process you want to create" << endl; 
     cin >> len;
     cout << "Please choose FIFO or SJF, FIFO 0, SJF 1" << endl;
